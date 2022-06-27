@@ -6,6 +6,8 @@ package io.zipcoder;
  */
 public class StringsAndThings {
 
+
+
     /**
      * Given a string, count the number of words ending in 'y' or 'z' -- so the 'y' in "heavy" and the 'z' in "fez" count,
      * but not the 'y' in "yellow" (not case sensitive). We'll say that a y or z is at the end of a word if there is not an alphabetic
@@ -15,7 +17,16 @@ public class StringsAndThings {
      *           countYZ("day fyyyz"); // Should return 2
      */
     public Integer countYZ(String input){
-        return null;
+        Integer counter = 0;
+        for (int i = 0; i < input.length() - 1; i++) {
+            if ((input.charAt(i) == 'y' || input.charAt(i) == 'Y' || input.charAt(i) == 'z' || input.charAt(i) == 'Z') && !Character.isLetter(input.charAt(i+1))) {
+                counter ++;
+            }
+        }
+        if (input.charAt(input.length() - 1) == 'y' || input.charAt(input.length() - 1) == 'Y' || input.charAt(input.length() - 1) == 'z' || input.charAt(input.length() - 1) == 'Z') {
+            counter++;
+        }
+        return counter;
     }
 
     /**
@@ -28,7 +39,10 @@ public class StringsAndThings {
      *           removeString("Hello there", "x") // Should return "Hello there"
      */
     public String removeString(String base, String remove){
-        return null;
+        while (base.contains(remove)) {
+            base = base.replace(remove, "");
+        }
+        return base;
     }
 
     /**
@@ -40,7 +54,21 @@ public class StringsAndThings {
      *           containsEqualNumberOfIsAndNot("noisxxnotyynotxisi") // Should return true
      */
     public Boolean containsEqualNumberOfIsAndNot(String input){
-        return null;
+        int isCounter = 0;
+        int notCounter = 0;
+
+        for (int i = 0; i < input.length() - 1; i++) {
+            if (input.substring(i, i+2).equals("is")) {
+                isCounter++;
+            }
+        }
+        for (int i = 0; i < input.length() - 2; i++) {
+            if (input.substring(i, i+3).equals("not")) {
+                notCounter++;
+            }
+        }
+        if (isCounter == notCounter) return true;
+        return false;
     }
 
     /**
@@ -51,7 +79,24 @@ public class StringsAndThings {
      *           gHappy("xxggyygxx") // Should return  false
      */
     public Boolean gIsHappy(String input){
-        return null;
+        for (int i = 1; i < input.length() - 1; i++) {
+            if (input.charAt(i) == 'g') {
+                if ((input.charAt(i-1) != 'g')&&(input.charAt(i+1) != 'g')) {
+                    System.out.println(input);
+                    System.out.println(i);
+                    return false;
+                }
+            }
+        }
+        // look at first letter
+        if (input.charAt(0) == 'g') {
+            if (input.charAt(1) != 'g') return false;
+        }
+        // look at last letter
+        if (input.charAt(input.length() - 1) == 'g') {
+            if (input.charAt(input.length() - 2) != 'g') return false;
+        }
+        return true;
     }
 
 
@@ -63,6 +108,12 @@ public class StringsAndThings {
      *            countTriple("a") // Should return 0
      */
     public Integer countTriple(String input){
-        return null;
+        int tripleCounter = 0;
+        for (int i = 0; i < input.length() - 2; i++) {
+            if (input.charAt(i) == input.charAt(i+1) && input.charAt(i) == input.charAt(i+2)) {
+                tripleCounter++;
+            }
+        }
+        return tripleCounter;
     }
 }
